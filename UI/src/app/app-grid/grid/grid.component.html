@@ -1,0 +1,56 @@
+<div class="grid-class" id="{{gridId}}">
+        <p-table [columns]="columns" [value]="dataList"  [responsive]="true"
+            (onPage)="onPage($event)" [paginator]="paginator" [rows]="pageSize" [totalRecords]="totalRecords"
+            [lazy]="true" [filterDelay]="1000" [scrollable]="scrollable" [scrollHeight]="scrollHeight"
+            [selectionMode]="selectionMode" [(selection)]="selection" [dataKey]="selectionDataKey">
+    
+            <ng-template pTemplate="header" let-columns>
+                <tr class="grid-header">
+                    <th *ngIf="selectionMode === 'multiple'" style="width: 2.25em">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" (click)="onColumnClick(col)">
+                        {{col.header}}<p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+                <tr>
+                    <th *ngIf="selectionMode === 'multiple'" style="width: 2.25em"></th>
+                    <th *ngFor="let col of columns" class="grid-filter-col">
+                        <input id="grid-filter-col-{{col.field}}" *ngIf="col.filter" pInputText class="grid-filter-col-input" type="text" (input)="onFilter($event.target.value, col.field)"
+                            placeholder="Search {{col.header}}...">
+                    </th>
+                </tr>
+            </ng-template>
+    
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" [ngClass]="!rowData.isActive ? 'inactive-rec' : null">
+                    <td *ngIf="selectionMode === 'multiple'"  style="width: 2.25em">
+                        <p-tableCheckbox  [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let column of columns" [ngClass]="(rowData[column.isActiveField] === 0 || rowData[column.isActiveField] === false) ? 'mop-inactive-rec' : null">
+    
+                            <span [ngSwitch]="column.customColumn.type">
+                                <span *ngSwitchCase="'customLabelLink'" class="mop-text-elipsis grid-column" (click)="column.customColumn.clickFn(rowData)">
+                                    <a *ngIf="column.customColumn.label" class="">{{column.customColumn.label}}</a>
+                                    <a *ngIf="!column.customColumn.label" class="btn btn-link" >{{column.field}}</a>
+                                </span>
+                                <span *ngSwitchCase="'link'" class="mop-text-elipsis grid-column">
+                                    <button type="button" class="btn btn-link" (click)="column.customColumn.clickFn(rowData)">{{rowData[column.field]}}</button>
+                                </span>
+                                <span *ngSwitchCase="'Bttnlink'" class="mop-text-elipsis grid-column">
+                                    <a class="btn btn-link" title="undelete" *ngIf="!rowData[column.field]" (click)="column.customColumn.clickFn(rowData, 'Active')">undelete</a>
+                                    <a class="btn btn-link" title="delete" *ngIf="rowData[column.field]" (click)="column.customColumn.clickFn(rowData, 'Inactive')">delete</a>
+                                </span>
+                                <span *ngSwitchCase="'date'" title="{{rowData[column.field] | date:'medium'}}" class="mop-text-elipsis grid-column">
+                                    {{rowData[column.field] | date:'medium'}}
+                                </span>
+                                <span *ngSwitchCase="'text'" title="{{rowData[column.field]}}" class="mop-text-elipsis grid-column">
+                                    {{rowData[column.field]}}
+                                </span>
+                            </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    

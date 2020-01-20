@@ -1,0 +1,18 @@
+.image-form-page {
+    padding: 15px;
+}
+
+.compressedFile {
+    width: 100%;
+    border: 5px solid grey;
+    margin: 10px 0px;
+}
+
+.form-fields {
+    padding: 10px; 
+    border: 1px solid grey;
+}
+
+.footer {
+    margin-top: 10px;
+}

@@ -1,0 +1,20 @@
+<div class="app-login-page">
+  <div class="app-login-form">
+    <div>
+      <form>
+      <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" class="form-control" id="emailAddress" name="emailAddress" [(ngModel)]="email">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password">
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Login</button>
+      <button type="button" class="btn btn-link" (click)="onResetPassword()">Reset password</button>
+      </form>
+    </div>
+
+  </div>
+
+</div>

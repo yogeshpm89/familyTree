@@ -1,0 +1,190 @@
+<div class="image-form-page">
+  <div class="add-image-button float-right">
+    <p-button label="Back" icon="pi pi-plus" iconPos="left" (onClick)="onBack($event)"></p-button>
+  </div>
+  <div class="alert alert-info">
+    <strong>Note: </strong> Please select image, fill in all necessary details, Click on upload button.
+  </div>
+  <p-fileUpload customUpload="true" 
+    (onSelect)="fileSelectHandler($event)" 
+    (uploadHandler)="fileUploadHandler($event)" 
+    maxFileSize="15000000" 
+    [showUploadButton]="false">
+    <ng-template pTemplate="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles; index as i">
+                <div *ngIf="!file.size">
+                  <a href="#" (click)="downloadFile(file.id, $event,file.name)" >{{file.name}}</a>
+                  <i class="fa fa-trash-o trash-image" *ngIf="!disabled.sectionElementQuestionAnswer" (click)="deleteUploadImageOfSection(sectionElement.value[i],i)"></i>
+                </div>
+                  <div *ngIf="show.uploadFile && file.size">
+                  <a (click)="preview(file.id, $event,file.name,i)">preview</a>
+                </div> 
+                <span *ngIf="file.size">{{file.name}} - {{file.size}} bytes</span>
+            </li>
+        </ul>
+    </ng-template>
+  </p-fileUpload>
+
+  <div *ngIf="compressedFileUrl">
+    <img class="compressedFile img-thumbnail" src="{{compressedFileUrl}}">
+  </div>
+<div *ngIf="compressedFile" class="form-fields">
+<p-accordion [multiple]="true">
+    <p-accordionTab header="Name and nookh">
+       <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="firstName">First name:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="imageDetails.firstName">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="lastName">Last name:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="imageDetails.lastName">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="parentName">Parent name:</label>
+            <input type="text" class="form-control" id="parentName" name="parentName" [(ngModel)]="imageDetails.parentName">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="parentName1">Grand parent name:</label>
+            <input type="text" class="form-control" id="parentName1" name="parentName1" [(ngModel)]="imageDetails.parentName1">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="parentName2">Great grand parent name:</label>
+            <input type="text" class="form-control" id="parentName2" name="parentName2" [(ngModel)]="imageDetails.parentName2">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="nookh">Nookh:</label>
+            <input type="text" class="form-control" id="nookh" name="nookh" [(ngModel)]="imageDetails.nookh">
+          </div>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Base address">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="baseAddress">Base address:</label>
+            <textarea pInputTextarea class="form-control" id="baseAddress" name="baseAddress" [(ngModel)]="imageDetails.baseAddress"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="baseCountry">Base country:</label><br>
+            <p-dropdown [options]="baseCountryList" [filter]="true" filterBy="label" (onChange)="onCountryChange($event, 1)"
+              [virtualScroll]="true" [itemSize]="20"
+              [(ngModel)]="imageDetails.baseCountry" placeholder="Select a country" optionLabel="name" [showClear]="true">
+              <ng-template let-country pTemplate="item"> 
+                <div style="font-size:14px;">{{country.label}}</div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="name">Base state:</label><br>
+            <p-dropdown [options]="baseStateList" [filter]="true" filterBy="label" (onChange)="onStateChange($event, 1)"
+              [virtualScroll]="true" [itemSize]="20"
+              [(ngModel)]="imageDetails.baseState" placeholder="Select a state" optionLabel="name" [showClear]="true">
+              <ng-template let-state pTemplate="item"> 
+                <div style="font-size:14px;">{{state.label}}</div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="city">Current city:</label><br>
+            <p-dropdown [options]="baseCityList" [filter]="true" filterBy="label"
+              [virtualScroll]="true" [itemSize]="20"
+              [(ngModel)]="imageDetails.baseCity" placeholder="Select a city" optionLabel="name" [showClear]="true">
+              <ng-template let-city pTemplate="item"> 
+                <div style="font-size:14px;">{{city.label}}</div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="mobile">Mobile:</label>
+            <input type="number" class="form-control" id="mobile" name="mobile" [(ngModel)]="imageDetails.mobile">
+          </div>
+        </div>
+
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab header="Current address and mobile">
+       <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="currentAddress">Current address:</label>
+            <textarea pInputTextarea class="form-control" id="currentAddress" name="currentAddress" [(ngModel)]="imageDetails.currentAddress"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="country">Current country:</label><br>
+            <p-dropdown [options]="countryList" [filter]="true" filterBy="label" (onChange)="onCountryChange($event)"
+              [virtualScroll]="true" [itemSize]="20"
+              [(ngModel)]="imageDetails.country" placeholder="Select a country" optionLabel="name" [showClear]="true">
+              <ng-template let-country pTemplate="item"> 
+                <div style="font-size:14px;">{{country.label}}</div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="name">Current state:</label><br>
+            <p-dropdown [options]="stateList" [filter]="true" filterBy="label" (onChange)="onStateChange($event)"
+              [virtualScroll]="true" [itemSize]="20"
+              [(ngModel)]="imageDetails.state" placeholder="Select a state" optionLabel="name" [showClear]="true">
+              <ng-template let-state pTemplate="item"> 
+                <div style="font-size:14px;">{{state.label}}</div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="city">Current city:</label><br>
+            <p-dropdown [options]="cityList" [filter]="true" filterBy="label"
+              [virtualScroll]="true" [itemSize]="20"
+              [(ngModel)]="imageDetails.city" placeholder="Select a city" optionLabel="name" [showClear]="true">
+              <ng-template let-city pTemplate="item"> 
+                <div style="font-size:14px;">{{city.label}}</div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="mobile">Mobile:</label>
+            <input type="number" class="form-control" id="mobile" name="mobile" [(ngModel)]="imageDetails.mobile">
+          </div>
+        </div>
+
+      </div>
+    </p-accordionTab>
+</p-accordion>
+
+</div>
+
+  <div *ngIf="compressedFileUrl" class="footer">
+    <button type="submit" class="btn btn-primary float-right" (click)="onUpload()">Upload</button>
+  </div>
+</div>

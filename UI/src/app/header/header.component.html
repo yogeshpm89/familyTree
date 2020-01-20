@@ -1,0 +1,13 @@
+<div class="app-header">
+  
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center">
+      <h3>{{LABELS.applicationName}}</h3>
+    </div>
+    <div class="col-sm-4">
+      <button *ngIf="isUserLoggedin" class="float-right" pButton type="button" label="Logout" (click)="logout()"></button>
+    </div>
+  </div>
+
+</div>

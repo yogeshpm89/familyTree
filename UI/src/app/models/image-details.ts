@@ -1,0 +1,30 @@
+import { City } from './City';
+import { State } from './State';
+import { Country } from './Country';
+export class ImageDetails {
+    imageDetailsId: number;
+    activityId: number;
+    imageName: string;
+    firstName: string;
+    parentName: string;
+    parentName1: string;
+    parentName2: string;
+    lastName: string;
+    mobile: string;
+    currentAddress: string;
+    country: Country;
+    state: State;
+    city: City;
+    baseAddress: string;
+    baseCountry: Country;
+    baseState: State;
+    baseCity: City;
+    pincode: string;
+    nookh: string;
+    version: number;
+    isActive: number;
+    createdBy: string;
+    createdDate: string;
+    modifiedBy: string;
+    modifiedDate: string;
+}

@@ -1,0 +1,12 @@
+<div class="user-list-page">
+  <div class="add-user-button float-right">
+    <p-button label="Add user" icon="pi pi-user-plus" iconPos="left" (onClick)="onAddUser($event)"></p-button>
+  </div>
+  <app-grid #userGrid [dataSourceURL]="userListDataSourceURL" [columns]="userListColumns" [filters]="userListFilters"
+    [pageSize]="userListGridPageSize"></app-grid>
+
+  <p-dialog header="Add user" [modal]="true" [(visible)]="showUserForm" [positionTop]="50">
+    <app-user-form *ngIf="showUserForm" [user]="selectedUser" (onDone)="onUserFormDone()"></app-user-form>
+  </p-dialog>
+  <p-confirmDialog></p-confirmDialog>
+</div>
