@@ -17,7 +17,7 @@ CREATE TABLE `image_details` (
   `base_country` int(11) DEFAULT NULL,
   `base_state` int(11) DEFAULT NULL,
   `base_city` int(11) DEFAULT NULL,
-  `current_address` varchar(100) DEFAULT NULL,
+  `current_address` varchar(4000) DEFAULT NULL,
   `country` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `city`int(11) DEFAULT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE `image_details_hist` (
   `base_country` int(11) DEFAULT NULL,
   `base_state` int(11) DEFAULT NULL,
   `base_city` int(11) DEFAULT NULL,
-  `current_address` varchar(100) DEFAULT NULL,
+  `current_address` varchar(4000) DEFAULT NULL,
   `country` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
   `city`int(11) DEFAULT NULL,
@@ -125,6 +125,8 @@ INSERT INTO `crud_config_param` (`crud_config_param_id`,`crud_config_id`,`entity
 (null,201,'beginDate','begin_date','DATE',1,1);
 
 
+
+
 delete from component_filter_param_config where component_id = (select component_id from component_config where component_url = '/component/images');               
 delete from component_config where component_url = '/component/images';
 
@@ -139,19 +141,25 @@ id.parent_name_1 parentName1,
 id.parent_name_2 parentName2,
 id.mobile mobile,
 id.base_address baseAddress,
-id.base_country baseCountry,
-id.base_state baseState,
-id.base_city baseCity,
+bc.name baseCountry,
+bs.name baseState,
+bct.name baseCity,
 id.current_address currentAddress,
-id.country country,
-id.state state,
-id.city city,
+c.name country,
+s.name state,
+ct.name city,
 id.pincode pincode,
 id.nookh nookh,
 id.year year,
 id.month month,
 id.day day
-FROM image_details id
+FROM image_details id 
+inner join countries c on (id.country = c.id)
+inner join countries bc on (id.base_country = bc.id)
+inner join states s on (id.state = s.id)
+inner join states bs on (id.base_state = bs.id)
+inner join cities ct on (id.city = ct.id)
+inner join cities bct on (id.base_city = bct.id)
 WHERE is_active = 1  ',
 ' order by first_name, lastName desc '
 ,0,'Y','SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp());
@@ -164,13 +172,13 @@ INSERT INTO `component_filter_param_config` (component_id,param_identifier,param
 (401,'parentName2','id.parent_name_1','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'mobile','id.mobile','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'baseAddress','id.base_address','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
-(401,'baseCountry','id.base_country','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
-(401,'baseState','id.base_state','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
-(401,'baseCity','id.base_city','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'baseCountry','bc.name','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'baseState','bs.name','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'baseCity','bct.name','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'address','id.address','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
-(401,'country','id.country','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
-(401,'state','id.state','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
-(401,'city','id.city','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'country','c.name','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'state','s.name','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'city','ct.name','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'pincode','id.pincode','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'nookh','id.nookh','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'year','id.year','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),

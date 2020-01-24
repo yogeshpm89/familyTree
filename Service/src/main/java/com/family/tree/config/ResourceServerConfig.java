@@ -23,7 +23,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.cors().disable().csrf().disable().
                 anonymous().and()
                 .authorizeRequests()
-                .antMatchers("/forgotPassword", "/resetPassword").permitAll()
+                .antMatchers("/forgotPassword", "/resetPassword", "/", "/*.js", "/*.css", "/*.ico", "/*.woff", "/*.ttf").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
