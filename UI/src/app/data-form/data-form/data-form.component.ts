@@ -65,9 +65,9 @@ export class DataFormComponent implements OnInit {
     this.imageDetails.state = this.stateList.find(state => state.name.toLocaleLowerCase() === "maharashtra");
     this.imageDetails.city = this.cityList.find(city => city.name.toLocaleLowerCase() === "nashik");
 
-    this.imageDetails.country = this.baseCountryList.find(country => country.phonecode === 91);
-    this.imageDetails.state = this.baseStateList.find(state => state.name.toLocaleLowerCase() === "maharashtra");
-    this.imageDetails.city = this.baseCityList.find(city => city.name.toLocaleLowerCase() === "nashik");
+    this.imageDetails.baseCountry = this.baseCountryList.find(country => country.phonecode === 91);
+    this.imageDetails.baseState = this.baseStateList.find(state => state.name.toLocaleLowerCase() === "maharashtra");
+    this.imageDetails.baseCity = this.baseCityList.find(city => city.name.toLocaleLowerCase() === "nashik");
   }
 
   fileSelectHandler(event) {

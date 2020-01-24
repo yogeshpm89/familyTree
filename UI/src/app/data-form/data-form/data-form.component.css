@@ -16,3 +16,11 @@
 .footer {
     margin-top: 10px;
 }
+
+label {
+    font-weight: bolder;
+}
+
+input#year, input#month, input#day {
+    width: 300px;
+}

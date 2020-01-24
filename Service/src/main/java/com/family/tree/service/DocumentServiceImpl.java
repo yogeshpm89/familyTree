@@ -106,7 +106,7 @@ public class DocumentServiceImpl implements DocumentService {
 
 	private Map<String, Object> getRequestObject(Map<String, Object> request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String[] intAttrs = new String[] {"country", "state", "city", "baseCountry", "baseState", "baseCity", "mobile"};
+		String[] intAttrs = new String[] {"country", "state", "city", "baseCountry", "baseState", "baseCity", "mobile", "year", "month", "day"};
 		String[] stringAttrs = new String[] {"firstName", "lastName", "parentName", "parentName1", "parentName2", "baseAddress", "nookh", "currentAddress", "imageName"};
 		for (String attr: intAttrs) populateIntegerAttr(request, map, attr);
 		for (String attr: stringAttrs) populateStringAttr(request, map, attr);

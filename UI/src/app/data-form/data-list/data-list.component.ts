@@ -45,7 +45,11 @@ export class DataListComponent implements OnInit {
       { field: 'currentAddress', header: 'Current address', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'currentAddress'}},
       { field: 'country', header: 'Country', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'country'}},
       { field: 'state', header: 'State', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'state'}},
-      { field: 'city', header: 'City', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'city'}}
+      { field: 'city', header: 'City', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'city'}},
+
+      { field: 'year', header: 'year', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'year'}},
+      { field: 'month', header: 'month', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'month'}},
+      { field: 'day', header: 'day', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'day'}}
       // { field: 'pincode', header: 'Pincode', sortable: true, filter: true, customColumn: { type: 'text', serverCol: 'pincode'}},
       
     ];

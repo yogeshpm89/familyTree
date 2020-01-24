@@ -23,6 +23,11 @@ CREATE TABLE `image_details` (
   `city`int(11) DEFAULT NULL,
   `pincode` int(6) DEFAULT NULL,
   `nookh` varchar(100) DEFAULT NULL,
+  
+  `year` int(4) DEFAULT NULL,
+  `month` int(2) DEFAULT NULL,
+  `day` int(2) DEFAULT NULL,
+
   `version` int(11) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT NULL,
   `created_by` varchar(100) DEFAULT NULL,
@@ -55,6 +60,11 @@ CREATE TABLE `image_details_hist` (
   `city`int(11) DEFAULT NULL,
   `pincode` int(6) DEFAULT NULL,
   `nookh` varchar(100) DEFAULT NULL,
+
+  `year` int(4) DEFAULT NULL,
+  `month` int(2) DEFAULT NULL,
+  `day` int(2) DEFAULT NULL,
+
   `version` int(11) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT NULL,
   `created_by` varchar(100) DEFAULT NULL,
@@ -99,7 +109,12 @@ INSERT INTO `crud_config_param` (`crud_config_param_id`,`crud_config_id`,`entity
 (null,200,'state','state','NUMBER',1,0),
 (null,200,'city','city','NUMBER',1,0),
 (null,200,'pincode','pincode','NUMBER',1,0),
-(null,200,'nookh','nookh','NUMBER',1,0),
+(null,200,'nookh','nookh','STRING',1,0),
+
+(null,200,'year','year','NUMBER',1,0),
+(null,200,'month','month','NUMBER',1,0),
+(null,200,'day','day','NUMBER',1,0),
+
 (null,200,'version','VERSION','NUMBER',1,1),
 (null,200,'isActive','IS_ACTIVE','NUMBER',1,1),
 (null,200,'createdBy','CREATED_BY','STRING',1,1),
@@ -132,7 +147,10 @@ id.country country,
 id.state state,
 id.city city,
 id.pincode pincode,
-id.nookh nookh
+id.nookh nookh,
+id.year year,
+id.month month,
+id.day day
 FROM image_details id
 WHERE is_active = 1  ',
 ' order by first_name, lastName desc '
@@ -154,4 +172,7 @@ INSERT INTO `component_filter_param_config` (component_id,param_identifier,param
 (401,'state','id.state','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'city','id.city','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
 (401,'pincode','id.pincode','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
-(401,'nookh','id.nookh','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp());
+(401,'nookh','id.nookh','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'year','id.year','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'month','id.month','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp()),
+(401,'day','id.day','=',0,'N',0,'Y', 'SYSTEM', current_timestamp(), 'SYSTEM', current_timestamp());

@@ -21,6 +21,9 @@ export class ImageDetails {
     baseCity: City;
     pincode: string;
     nookh: string;
+    year: Number = new Date().getFullYear();
+    month: Number = new Date().getMonth() + 1;
+    day: Number = new Date().getDate();
     version: number;
     isActive: number;
     createdBy: string;

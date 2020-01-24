@@ -115,14 +115,6 @@
             </p-dropdown>
           </div>
         </div>
-
-        <div class="col-sm-3">
-          <div class="form-group">
-            <label for="mobile">Mobile:</label>
-            <input type="number" class="form-control" id="mobile" name="mobile" [(ngModel)]="imageDetails.mobile">
-          </div>
-        </div>
-
       </div>
     </p-accordionTab>
 
@@ -179,6 +171,23 @@
         </div>
 
       </div>
+    </p-accordionTab>
+
+<p-accordionTab header="Date">
+    <div class="row">
+      <div class="col-sm-4">
+      <div class="form-group">
+            <label for="currentAddress">Year:</label><input type="number" min="1800" max="2050" class="form-control" id="year" name="year" [(ngModel)]="imageDetails.year"></div>
+      </div>
+      <div class="col-sm-4">
+      <div class="form-group">
+            <label for="currentAddress">Month:</label><input type="number" min="1" max="12" class="form-control" id="month" name="month"  [(ngModel)]="imageDetails.month"></div>
+          </div>
+      <div class="col-sm-4">
+      <div class="form-group">
+            <label for="currentAddress">Date:</label><input type="number" min="1" max="31" class="form-control" id="day" name="day" [(ngModel)]="imageDetails.day"></div>
+            </div>
+    </div>
     </p-accordionTab>
 </p-accordion>
 
