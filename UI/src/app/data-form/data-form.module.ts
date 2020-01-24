@@ -1,3 +1,4 @@
+import { DialogModule } from 'primeng/dialog';
 import { AppGridModule } from './../app-grid/app-grid.module';
 import { DataHomeComponent } from './data-home/data-home.component';
 import { DataListComponent } from './data-list/data-list.component';
@@ -23,7 +24,7 @@ import {AccordionModule} from 'primeng/accordion';
     DataFormRoutesRoutes,
     FileUploadModule,
     AppGridModule,
-    
+    DialogModule
   ],
   declarations: [DataFormComponent, DataListComponent, DataHomeComponent]
 })

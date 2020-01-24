@@ -3,6 +3,35 @@
   <div class="add-image-button float-right">
     <p-button label="Add image" icon="pi pi-plus" iconPos="left" (onClick)="onAddImage($event)"></p-button>
   </div>
+  {{showImage}}
   <app-grid #userGrid [dataSourceURL]="imageListDataSourceURL" [columns]="imageListColumns" [filters]="imageListFilters"
     [pageSize]="imageListGridPageSize"></app-grid>
+
+    <p-dialog header="Selected image" [modal]="true" [(visible)]="showImage" [positionTop]="50">
+      <p-header>
+          Header content here
+      </p-header>
+      <img [src]="selectedImage" class="selected-image"/>
+      <div *ngIf="selectedRow" class="row">
+        <div class="col-sm-8">
+            <label for="name">Name:&nbsp;&nbsp;</label>{{selectedRow.lastName}} {{selectedRow.firstName}} {{selectedRow.parentName}} {{selectedRow.parentName1}} {{selectedRow.parentName2}}
+        </div>
+        <div class="col-sm-4">
+            <label for="nookh">Nookh:&nbsp;&nbsp;</label>{{selectedRow.nookh}}
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="nookh">Base address:&nbsp;&nbsp;</label>{{selectedRow.baseAddress}}
+            <div>{{selectedRow.baseCountry}} {{selectedRow.baseState}} {{selectedRow.baseCity}}</div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="nookh">Current address:&nbsp;&nbsp;</label>{{selectedRow.currentAddress}}
+            <div>{{selectedRow.country}} {{selectedRow.state}} {{selectedRow.city}} {{selectedRow.pincode}}</div>
+          </div>
+        </div>
+      </div>
+    </p-dialog>
 </div>

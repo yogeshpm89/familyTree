@@ -2,3 +2,10 @@
 //main color scheme
 $primaryColor:#007ad9;
 $headerColor:#808B96;
+
+.ui-dialog {
+    width: 80%;
+    .ui-dialog-content {
+        overflow-x: hidden;
+    }
+}

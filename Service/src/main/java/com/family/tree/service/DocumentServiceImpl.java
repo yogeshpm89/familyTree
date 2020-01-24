@@ -1,12 +1,14 @@
 package com.family.tree.service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import com.family.tree.constant.Activity;
 import com.family.tree.constant.CrudComponent;
 import com.family.tree.constant.CrudConfigConstant;
 import com.family.tree.constant.EmailBody;
+import com.family.tree.constant.ExceptionMessage;
 import com.family.tree.constant.ValidationMessage;
 import com.family.tree.properties.ApplicationProperties;
 import com.family.tree.resources.LoginApiController;
@@ -121,6 +124,27 @@ public class DocumentServiceImpl implements DocumentService {
 		if (request.containsKey(key) && request.get(key) != null) {
 			map.put(key, request.get(key).toString());
 		}
+	}
+
+	@Override
+	public Map<String, Object> get(String fileName) throws Exception {
+		Map<String, Object> response = new HashMap<String, Object>();
+		String dir = applicationProperties.getOutputFileDirectory();
+		File file = new File(dir + "//" + fileName);
+		if (file.exists()) {
+				byte[] bytesArray = new byte[(int) file.length()]; 
+				FileInputStream fis = new FileInputStream(file);
+				fis.read(bytesArray); //read file into bytes[]
+				fis.close();
+				
+				response.put("status", true);
+				response.put("data", bytesArray);
+				
+		} else {
+			response.put("status", false);
+			response.put("message", ExceptionMessage.FILE_NOT_PRESENT);
+		}
+		return response;
 	}
 
 }

@@ -10,7 +10,8 @@ const urls = {
     },
     PING: SERVER_URL + '/component/ping',
     DATA: {
-        SAVE: SERVER_URL + 'file'
+        SAVE: SERVER_URL + 'file',
+        GET: SERVER_URL + 'file/{fileName}',
     },
     REF: {
         COUNTRY: SERVER_URL + 'data/component/countries',

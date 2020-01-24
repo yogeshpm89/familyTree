@@ -27,5 +27,9 @@ public interface FileApi {
 	@RequestMapping(value = "/file", method = RequestMethod.POST)
 	@Secured(value = { "ROLE_USER" })
 	ResponseEntity<Map<String, Object>> save(@RequestParam("file") MultipartFile file, String details, HttpServletRequest request);
+	
+	@RequestMapping(value = "/file/{fileName}", method = RequestMethod.GET)
+	@Secured(value = { "ROLE_USER" })
+	ResponseEntity<Map<String, Object>> get(@PathVariable("fileName") String fileName, HttpServletRequest request);
 
 }

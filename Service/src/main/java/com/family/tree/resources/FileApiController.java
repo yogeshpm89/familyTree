@@ -68,4 +68,23 @@ public class FileApiController implements FileApi {
 		return new ResponseEntity<Map<String, Object>>(res, httpStatus);
 	}
 
+	@Override
+	public ResponseEntity<Map<String, Object>> get(String fileName, HttpServletRequest request) {
+		logger.info("get file start, request = " + fileName);
+		Map<String, Object> res = new HashMap<String, Object>();
+		HttpStatus httpStatus;
+		try {
+			res = documentService.get(fileName);
+			httpStatus = HttpStatus.OK;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("get file, Exception = ", e);
+			res.put("status", false);
+			res.put("message", e.getMessage());
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		logger.info("get file end, response = " + res);
+		return new ResponseEntity<Map<String, Object>>(res, httpStatus);
+	}
+
 }

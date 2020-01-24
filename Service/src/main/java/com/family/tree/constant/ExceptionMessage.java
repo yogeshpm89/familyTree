@@ -4,8 +4,8 @@ public enum ExceptionMessage {
 	
 	ADD_USER("Add user exception"),
 	UPDATE_USER("Update user exception"),
-	FORGOT_PASSWORD("Forgot password exception");
-
+	FORGOT_PASSWORD("Forgot password exception"),
+	FILE_NOT_PRESENT("File not present");
 	String name;
 
 	private ExceptionMessage(String name) {

@@ -5,5 +5,13 @@
         right: 100px;
         position: absolute;
     }
+
+    label {
+        font-weight: bolder;
+    }
+
+    .selected-image {
+        width: 100%;
+    }
 }
 
