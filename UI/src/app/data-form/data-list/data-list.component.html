@@ -3,7 +3,6 @@
   <div class="add-image-button float-right">
     <p-button label="Add image" icon="pi pi-plus" iconPos="left" (onClick)="onAddImage($event)"></p-button>
   </div>
-  {{showImage}}
   <app-grid #userGrid [dataSourceURL]="imageListDataSourceURL" [columns]="imageListColumns" [filters]="imageListFilters"
     [pageSize]="imageListGridPageSize"></app-grid>
 
