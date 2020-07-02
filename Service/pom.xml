@@ -108,7 +108,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<oauth.version>2.3.6.RELEASE</oauth.version>
-		<mysql-connector.version>8.0.11</mysql-connector.version>
+		<mysql-connector.version>8.0.16</mysql-connector.version>
 	</properties>
 
 	<build>
